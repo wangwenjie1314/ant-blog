@@ -7,7 +7,7 @@ const MenuItemGroup = Menu.ItemGroup;
 const Header = React.createClass({
   getInitialState() {
     return {
-      current: 'mail'
+      current: 'home'
     };
   },
   handleClick(e) {
@@ -22,8 +22,11 @@ const Header = React.createClass({
         selectedKeys={[this.state.current]}
         theme={this.state.theme}
         mode="horizontal">
+        <Menu.Item key="home">
+          <Link to="/"><Icon type="home" />首页</Link>
+        </Menu.Item>
         <Menu.Item key="mail">
-          <Link to="/about"><Icon type="mail" />导航一</Link>
+          <Link to="/about"><Icon type="mail" />关于我们</Link>
         </Menu.Item>
         <Menu.Item key="app" disabled>
           <Icon type="appstore" />导航二
@@ -39,7 +42,7 @@ const Header = React.createClass({
           </MenuItemGroup>
         </SubMenu>
         <Menu.Item key="alipay">
-          <a href="http://www.alipay.com/" target="_blank">导航四 - 链接</a>
+          <a href="http://www.alipay.com/" target="_blank">导航四 - 支付宝</a>
         </Menu.Item>
       </Menu>
     );
