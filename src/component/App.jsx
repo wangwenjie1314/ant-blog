@@ -1,12 +1,17 @@
 import React from 'react';
-import { DatePicker } from 'antd';
+import Header from './common/header';
+import Footer from './common/footer';
 
 const App = React.createClass({
   render() {
     return (
-      <DatePicker />
+    	<div>
+        <Header />
+  	    <div>{this.props.children}</div>
+      	<Footer />
+      </div>
     );
-  },
+  }
 });
 
 export default App;
