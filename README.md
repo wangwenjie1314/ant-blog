@@ -23,3 +23,21 @@ npm run dev
 ```
 npm run build
 ```
+
+## More Info Of React-Router
+
+### 写法1
+
+![Image1](md/1.pic_hd.jpg) 
+
+![Image2](md/2.pic_hd.jpg) 
+
+### 写法2
+
+![Image3](md/3.pic_hd.jpg) 
+
+![Image4](md/4.pic_hd.jpg) 
+
+
+
+

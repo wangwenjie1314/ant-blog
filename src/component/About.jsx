@@ -1,6 +1,7 @@
 import React from 'react';
 import Sider from './common/sider';
 import Crumb from './common/crumb';
+import AboutHome from './About/index';
 
 const About = React.createClass({
   render() {
@@ -8,7 +9,7 @@ const About = React.createClass({
     	<div>
 	        <Sider />
 	        <Crumb />
-	  	    {this.props.children}
+	  	    {this.props.children || <AboutHome/>}
 	    </div>
     );
   },
