@@ -23,19 +23,11 @@ const Sider = React.createClass({
         defaultOpenKeys={['sub1']}
         selectedKeys={[this.state.current]}
         mode="inline">
-        <SubMenu key="sub1" title={<span><Icon type="mail" /><span>导航一</span></span>}>
-          <MenuItemGroup title="分组1">
-            <Menu.Item key="1"><Link to='/about'>AboutHome</Link></Menu.Item>
-            <Menu.Item key="2"><Link to='/about/me'>AboutMe</Link></Menu.Item>
-          </MenuItemGroup>
-          <MenuItemGroup title="分组2">
-            <Menu.Item key="3">选项3</Menu.Item>
-            <Menu.Item key="4">选项4</Menu.Item>
-          </MenuItemGroup>
+        <SubMenu key="sub1" title={<span><Icon type="mail" /><span>About</span></span>}>
+          <Menu.Item key="5"><Link to='/about'>Home</Link></Menu.Item>
+          <Menu.Item key="6"><Link to='/about/me'>Me</Link></Menu.Item>
         </SubMenu>
         <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>导航二</span></span>}>
-          <Menu.Item key="5">选项5</Menu.Item>
-          <Menu.Item key="6">选项6</Menu.Item>
           <SubMenu key="sub3" title="三级导航">
             <Menu.Item key="7">选项7</Menu.Item>
             <Menu.Item key="8">选项8</Menu.Item>
