@@ -12,7 +12,8 @@
     "jquery": "^2.2.0",
     "react": "~0.14.3",
     "react-dom": "~0.14.3",
-    "react-router": "2.0.0-rc5"
+    "react-router": "2.0.0-rc5",
+    "webpack": "^1.12.12"
   },
   "devDependencies": {
     "dora": "0.2.x",

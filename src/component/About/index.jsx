@@ -1,9 +1,11 @@
 import React from 'react';
 
+import './about';//引入less
+
 const AboutHome = React.createClass({
   render() {
     return (
-    	<div>这里是About的Home页</div>
+    	<div className="root"><p className="aa">这里是About的Home页</p></div>
     );
   },
 });

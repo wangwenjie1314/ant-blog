@@ -2,17 +2,6 @@ import React from 'react';
 import $ from 'jquery';
 import { Spin } from 'antd';
 
-const dark = 'hsl(200, 20%, 20%)'
-const light = '#fff'
-const styles = {};
-
-styles.lebox = {
-  padding: '30px',
-  overflow: 'hidden',
-  //background: dark,
-  color: light
-}
-
 const Home = React.createClass({
   getInitialState() {
     return { 
@@ -39,7 +28,7 @@ const Home = React.createClass({
   render() {
     if (this.state.loading) {
       return (
-        <div style={styles.lebox}>
+        <div>
             <Spin />
         </div>
       );
@@ -55,10 +44,10 @@ const Home = React.createClass({
         );
       });
       return (
-        <main style={{ padding:20 }}>
+        <div>
           <h1>Most Popular JavaScript Projects in Github (base on Jquery-Ajax)</h1>
           <ol>{repoList}</ol>
-        </main>
+        </div>
       );
     }
   }
