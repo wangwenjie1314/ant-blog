@@ -25,8 +25,11 @@ const Header = React.createClass({
         <Menu.Item key="home">
           <Link to="/"><Icon type="home" />首页</Link>
         </Menu.Item>
-        <Menu.Item key="mail">
-          <Link to="/about"><Icon type="mail" />关于我们</Link>
+        <Menu.Item key="book">
+          <Link to="/list"><Icon type="book" />博客列表</Link>
+        </Menu.Item>
+        <Menu.Item key="user">
+          <Link to="/about"><Icon type="user" />关于我们</Link>
         </Menu.Item>
       </Menu>
     );

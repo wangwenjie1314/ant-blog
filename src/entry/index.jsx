@@ -5,10 +5,9 @@ import { render } from 'react-dom';
 import { Router, Route, hashHistory, browserHistory, Link ,IndexRoute } from 'react-router';
 
 import App from '../component/App';
-
 import About from '../component/About';
-
-import AboutMe from '../component/About/me';
+import AboutMe from '../component/about/me';
+import List from '../component/list/index';
 
 //router 第二种写法
 const routes = {
@@ -25,6 +24,10 @@ const routes = {
     		}
     	]
    	},
+    {
+      path: 'list',
+      component:List
+    },
     { 
     	path: '*',
     	component: App 
@@ -39,7 +42,7 @@ render(<Router history={hashHistory} routes={routes} />,
 //router 第一种写法
 //
 //import Home from '../component/Home';
-//import AboutHome from '../component/About/index';
+//import AboutHome from '../component/about/index';
 //
 // render((
 // 	<Router history={hashHistory}>
