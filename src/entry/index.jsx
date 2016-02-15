@@ -9,6 +9,8 @@ import About from '../component/About';
 import AboutMe from '../component/about/me';
 import Blog from '../component/Blog';
 import BlogAdd from '../component/blog/add';
+import BlogAdd2 from '../component/blog/add2';
+
 
 //router 第二种写法
 const routes = {
@@ -32,6 +34,10 @@ const routes = {
         {
           path:'add',
           component: BlogAdd
+        },
+        {
+          path:'add2',
+          component: BlogAdd2
         }
       ]
     },

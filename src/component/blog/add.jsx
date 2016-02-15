@@ -1,90 +1,169 @@
 import React from 'react';
-import { Form, Input, Select, Checkbox, Radio } from 'antd';
+import { Button, Form, Input } from 'antd';
+const createForm = Form.create;
 const FormItem = Form.Item;
-const Option = Select.Option;
-const RadioGroup = Radio.Group;
 
-function handleSelectChange(value) {
-  console.log('selected ' + value);
+function noop() {
+  return false;
 }
 
-const BlogAdd = React.createClass({
+class BlogAdd extends React.Component {
+  getValidateStatus(field) {
+    const { isFieldValidating, getFieldError, getFieldValue } = this.props.form;
+
+    if (isFieldValidating(field)) {
+      return 'validating';
+    } else if (!!getFieldError(field)) {
+      return 'error';
+    } else if (getFieldValue(field)) {
+      return 'success';
+    }
+  }
+
+  handleReset(e) {
+    e.preventDefault();
+    this.props.form.resetFields();
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.form.validateFields((errors, values) => {
+      if (!!errors) {
+        console.log('Errors in form!!!');
+        return;
+      }
+      console.log('Submit!!!');
+      console.log(values);
+    });
+  }
+
+  userExists(rule, value, callback) {
+    if (!value) {
+      callback();
+    } else {
+      setTimeout(() => {
+        if (value === 'JasonWood') {
+          callback([new Error('抱歉，该用户名已被占用。')]);
+        } else {
+          callback();
+        }
+      }, 800);
+    }
+  }
+
+  checkPass(rule, value, callback) {
+    const { validateFields } = this.props.form;
+    if (value) {
+      validateFields(['rePasswd']);
+    }
+    callback();
+  }
+
+  checkPass2(rule, value, callback) {
+    const { getFieldValue } = this.props.form;
+    if (value && value !== getFieldValue('passwd')) {
+      callback('两次输入密码不一致！');
+    } else {
+      callback();
+    }
+  }
+
   render() {
+    const { getFieldProps, getFieldError, isFieldValidating } = this.props.form;
+
     return (
-    	<Form horizontal>
-		    <FormItem
-		      id="control-input"
-		      label="输入框："
-		      labelCol={{ span: 6 }}
-		      wrapperCol={{ span: 14 }}>
-		      <Input id="control-input" placeholder="Please enter..." />
-		    </FormItem>
+      <Form horizontal form={this.props.form}>
+        <FormItem
+          label="用户名："
+          labelCol={{ span: 7 }}
+          wrapperCol={{ span: 12 }}
+          hasFeedback
+          help={isFieldValidating('name') ? '校验中...' : (getFieldError('name') || []).join(', ')}>
+          <Input placeholder="实时校验，输入 JasonWood 看看"
+            {...getFieldProps('name', {
+              rules: [
+                { required: true, min: 5, message: '用户名至少为 5 个字符' },
+                { validator: this.userExists },
+              ],
+            })} />
+        </FormItem>
 
-		    <FormItem
-		      id="control-textarea"
-		      label="文本域："
-		      labelCol={{ span: 6 }}
-		      wrapperCol={{ span: 14 }}>
-		      <Input type="textarea" id="control-textarea" rows="3" />
-		    </FormItem>
+        <FormItem
+          label="邮箱："
+          labelCol={{ span: 7 }}
+          wrapperCol={{ span: 12 }}
+          hasFeedback>
+          <Input type="email" placeholder="onBlur 与 onChange 相结合"
+            {...getFieldProps('email', {
+              validate: [{
+                rules: [
+                  { required: true },
+                ],
+                trigger: 'onBlur',
+              }, {
+                rules: [
+                  { type: 'email', message: '请输入正确的邮箱地址' },
+                ],
+                trigger: ['onBlur', 'onChange'],
+              }]
+            })}/>
+        </FormItem>
 
-		    <FormItem
-		      id="select"
-		      label="Select 选择器："
-		      labelCol={{ span: 6 }}
-		      wrapperCol={{ span: 14 }}>
-		      <Select id="select" size="large" defaultValue="lucy" style={{ width: 200 }} onChange={handleSelectChange}>
-		        <Option value="jack">jack</Option>
-		        <Option value="lucy">lucy</Option>
-		        <Option value="disabled" disabled>disabled</Option>
-		        < Option value="yiminghe">yiminghe</Option>
-		      </Select>
-		    </FormItem>
+        <FormItem
+          label="密码："
+          labelCol={{ span: 7 }}
+          wrapperCol={{ span: 12 }}
+          hasFeedback>
+          <Input type="password" autoComplete="off"
+            {...getFieldProps('passwd', {
+              rules: [
+                { required: true, whitespace: true, message: '请填写密码' },
+                { validator: this.checkPass.bind(this) },
+              ],
+            })}
+            onContextMenu={noop} onPaste={noop} onCopy={noop} onCut={noop}/>
+        </FormItem>
 
-		    <FormItem
-		      label="Checkbox 多选框："
-		      labelCol={{ span: 6 }}
-		      wrapperCol={{ span: 18 }} >
-		        <label className="ant-checkbox-vertical">
-		          <Checkbox />选项一
-		        </label>
-		        <label className="ant-checkbox-vertical">
-		          <Checkbox />选项二
-		        </label>
-		        <label className="ant-checkbox-vertical">
-		          <Checkbox disabled />选项三（不可选）
-		        </label>
-		    </FormItem>
+        <FormItem
+          label="确认密码："
+          labelCol={{ span: 7 }}
+          wrapperCol={{ span: 12 }}
+          hasFeedback>
+          <Input type="password" autoComplete="off" placeholder="两次输入密码保持一致"
+            onContextMenu={noop} onPaste={noop} onCopy={noop} onCut={noop}
+            {...getFieldProps('rePasswd', {
+              rules: [{
+                required: true,
+                whitespace: true,
+                message: '请再次输入密码',
+              }, {
+                validator: this.checkPass2.bind(this),
+              }],
+            })}/>
+        </FormItem>
 
-		    <FormItem
-		      label="Checkbox 多选框："
-		      labelCol={{ span: 6 }}
-		      wrapperCol={{ span: 18 }} >
-		        <label className="ant-checkbox-inline">
-		          <Checkbox />选项一
-		        </label>
-		        <label className="ant-checkbox-inline">
-		          <Checkbox />选项二
-		        </label>
-		        <label className="ant-checkbox-inline">
-		          <Checkbox />选项三
-		        </label>
-		    </FormItem>
+        <FormItem
+          label="备注："
+          labelCol={{ span: 7 }}
+          wrapperCol={{ span: 12 }}>
+          <Input type="textarea" placeholder="随便写" id="textarea" name="textarea"
+            {...getFieldProps('textarea', {
+              rules: [
+                { required: true, message: '真的不打算写点什么吗？' },
+              ],
+            })}/>
+        </FormItem>
 
-		    <FormItem
-		      label="Radio 单选框："
-		      labelCol={{ span: 6 }}
-		      wrapperCol={{ span: 18 }} >
-		        <RadioGroup value="b">
-		          <Radio value="a">A</Radio>
-		          <Radio value="b">B</Radio>
-		          <Radio value="c">C</Radio>
-		          <Radio value="d">D</Radio>
-		        </RadioGroup>
-		    </FormItem>
-		  </Form>
+        <FormItem wrapperCol={{ span: 12, offset: 7 }} >
+        <Button type="primary" onClick={this.handleSubmit.bind(this)}>确定</Button>
+          &nbsp;&nbsp;&nbsp;
+        <Button type="ghost" onClick={this.handleReset.bind(this)}>重置</Button>
+        </FormItem>
+      </Form>
     );
-  },
-});
+  }
+}
+
+BlogAdd = createForm()(BlogAdd);
 
 export default BlogAdd;
