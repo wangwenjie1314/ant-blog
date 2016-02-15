@@ -7,7 +7,8 @@ import { Router, Route, hashHistory, browserHistory, Link ,IndexRoute } from 're
 import App from '../component/App';
 import About from '../component/About';
 import AboutMe from '../component/about/me';
-import List from '../component/list/index';
+import Blog from '../component/Blog';
+import BlogAdd from '../component/blog/add';
 
 //router 第二种写法
 const routes = {
@@ -25,8 +26,14 @@ const routes = {
     	]
    	},
     {
-      path: 'list',
-      component:List
+      path: 'blog',
+      component:Blog,
+      childRoutes :[
+        {
+          path:'add',
+          component: BlogAdd
+        }
+      ]
     },
     { 
     	path: '*',

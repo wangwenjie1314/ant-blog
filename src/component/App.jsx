@@ -8,7 +8,7 @@ const App = React.createClass({
     return (
     	<div>
 	        <Header />
-	  	    <div className="clearfix" style={{ minHeight:500 }}>
+	  	    <div className="clearfix" style={{ minHeight:500,paddingTop:20 }}>
 	  	    	{this.props.children || <Home/>}
 	  	    </div>
 	      	<Footer />

@@ -19,14 +19,14 @@ const Header = React.createClass({
   render() {
     return (
       <Menu onClick={this.handleClick}
-        selectedKeys={[this.state.current]}
-        theme={this.state.theme}
-        mode="horizontal">
+      selectedKeys={[this.state.current]}
+      theme={this.state.theme}
+      mode="horizontal">
         <Menu.Item key="home">
           <Link to="/"><Icon type="home" />首页</Link>
         </Menu.Item>
         <Menu.Item key="book">
-          <Link to="/list"><Icon type="book" />博客列表</Link>
+          <Link to="/blog"><Icon type="book" />博客列表</Link>
         </Menu.Item>
         <Menu.Item key="user">
           <Link to="/about"><Icon type="user" />关于我们</Link>
