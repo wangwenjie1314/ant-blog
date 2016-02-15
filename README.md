@@ -1,4 +1,4 @@
-# antd-demo
+# ant-blog
 
 ## base on
 
@@ -19,6 +19,14 @@ node >= 4
 ## Code Style
 
 https://github.com/airbnb/javascript
+
+## Had Run Success
+
+Less
+
+Router
+
+Ajax+Jquery
 
 ## Develop
 
@@ -49,5 +57,12 @@ npm run build
 ![Image4](md/4.pic_hd.jpg) 
 
 
+## Author
+
+wangwenjie
+
+## Date
+
+2016.2.15
 
 
